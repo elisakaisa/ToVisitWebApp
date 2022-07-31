@@ -3,3 +3,6 @@ node_modules
 requests/create_user.rest
 create_user.rest
 create_user
+login.rest
+login
+requests/login.rest

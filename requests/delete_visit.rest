@@ -1,0 +1,2 @@
+DELETE http://localhost:3111/api/visits/62e623285aea017f699999bf
+Content-Type: application/json

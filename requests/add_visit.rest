@@ -1,0 +1,14 @@
+POST http://localhost:3111/api/visits
+Content-Type: application/json
+
+{
+    "what": "test visit",
+    "where": "test place",
+    "category": ["test", "fancy post test"],
+    "how": ["train", "bus"],
+    "timeLength": "week",
+    "timeOfYear": ["spring", "summer"],
+    "priceCategory": "$$",
+    "easeOfOrganization": "hard",
+    "notes": "yada yada"
+}

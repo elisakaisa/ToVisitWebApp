@@ -1,0 +1,7 @@
+PATCH http://localhost:3111/api/visits/62e61def9f3eb5c9e927bfa1
+Content-Type: application/json
+
+{
+    "done": true,
+    "actualPrice": 10
+}

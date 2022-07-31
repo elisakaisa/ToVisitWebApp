@@ -1,2 +1,5 @@
 node_modules
 .env
+requests/create_user.rest
+create_user.rest
+create_user

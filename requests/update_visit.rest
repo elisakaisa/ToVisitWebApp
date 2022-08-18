@@ -1,7 +1,8 @@
-PATCH http://localhost:3111/api/visits/62e61def9f3eb5c9e927bfa1
+PATCH http://localhost:3111/api/visits/62fe33b6e91edb7245fa2df1
 Content-Type: application/json
+Authorization: bearer OiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsaXNhIiwiaWQiOiI2MmU2YTJiMjRkN2YzNjU3Nzg4MDhiNTYiLCJpYXQiOjE2NjA4MjY3MDZ9.O2Cnc0EGwsjUjJabEqvifA6ROHXYVjulCgG-GiBvzFQ
 
 {
     "done": true,
-    "actualPrice": 10
+    "totalWalkingDistance": 100
 }

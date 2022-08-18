@@ -21,7 +21,10 @@ visitRouter.get('/:id', async (request, response) => {
 
 // add entry
 visitRouter.post('/', async (request, response) => {
-    // TODO: add user & token identification
+    // token verification
+    if (!request.decodedToken) {
+        return response.status(401).json({ error: 'token missing or invalid' })
+    }
 
     // check content
     if (!request.body.what) {
@@ -49,6 +52,11 @@ visitRouter.post('/', async (request, response) => {
 
 // modify entry
 visitRouter.patch('/:id', async (request, response) => {
+    // token verification
+    if (!request.decodedToken) {
+        return response.status(401).json({ error: 'token missing or invalid' })
+    }
+
     let entry = await Visit.findById(request.params.id)
 
     // update each parameter if needed

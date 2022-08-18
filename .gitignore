@@ -6,3 +6,7 @@ create_user
 login.rest
 login
 requests/login.rest
+requests
+requests/add_visit.rest
+requests/update_visit.rest
+requests/delete_visit.rest

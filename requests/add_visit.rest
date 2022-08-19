@@ -1,14 +1,19 @@
 POST http://localhost:3111/api/visits
 Content-Type: application/json
-Authorization: bearer VybmFtZSI6ImVsaXNhIiwiaWQiOiI2MmU2YTJiMjRkN2YzNjU3Nzg4MDhiNTYiLCJpYXQiOjE2NjA4MjY1MzV9.jGGCOQ3s2DaEztdbV0mRx4XAV33KTBdy-2coz6UB9Vg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsaXNhIiwiaWQiOiI2MmU2YTJiMjRkN2YzNjU3Nzg4MDhiNTYiLCJpYXQiOjE2NjA4OTg1MjV9.PNIOTdY__U5vMu870uoagEYHAbxYciE9urrMPYWhxjE
 
 {
-    "what": "test visit token 3",
+    "what": "test season backend",
     "where": "test place 2",
     "category": ["test", "fancy post test"],
     "how": ["train", "car"],
     "timeLength": "month",
-    "timeOfYear": ["winter", "summer"],
+    "timeOfYear": {
+        "spring": true, 
+        "summer": true,
+        "fall": false,
+        "winter": false,
+        "indoors": false},
     "priceCategory": "$$",
     "easeOfOrganization": "easy",
     "notes": "yada yada yada"

@@ -70,7 +70,7 @@ visitRouter.patch('/:id', async (request, response) => {
         entry.category = request.body.category
     }
     if (request.body.how) {
-        entry.how = request.body.entry
+        entry.how = request.body.how
     }
     if (request.body.timeLength) {
         entry.timeLength = request.body.timeLength
@@ -97,7 +97,10 @@ visitRouter.patch('/:id', async (request, response) => {
         entry.actualPrice = request.body.actualPrice
     }
     
-    const updatedEntry = await Visit.findByIdAndUpdate(request.params.id, entry)
+    const updatedEntry = await Visit.findByIdAndUpdate(
+        request.params.id, 
+        entry, 
+        { new: true }) // needed to make sure data is updated in the frontend
     response.status(201).json(updatedEntry)
 })
 

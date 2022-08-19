@@ -56,6 +56,7 @@ visitRouter.patch('/:id', async (request, response) => {
     if (!request.decodedToken) {
         return response.status(401).json({ error: 'token missing or invalid' })
     }
+    console.log('request.body.done', request.body.done)
 
     let entry = await Visit.findById(request.params.id)
 
@@ -87,7 +88,7 @@ visitRouter.patch('/:id', async (request, response) => {
     if (request.body.notes) {
         entry.notes = request.body.notes
     }
-    if (request.body.done) {
+    if (request.body.done === true || request.body.done === false) {
         entry.done = request.body.done
     }
     if (request.body.totalWalkingDistance) {

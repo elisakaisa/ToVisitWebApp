@@ -43,8 +43,8 @@ visitRouter.post('/', async (request, response) => {
         easeOfOrganization: request.body.easeOfOrganization,
         notes: request.body.notes,
         done: false,
-        totalWalkingDistance: null,
-        actualPrice: null
+        totalWalkingDistance: '',
+        actualPrice: ''
      })
     const savedEntry = await entry.save()
     response.status(201).json(savedEntry)

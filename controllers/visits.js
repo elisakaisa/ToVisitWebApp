@@ -19,6 +19,26 @@ visitRouter.get('/:id', async (request, response) => {
     }
 })
 
+// get visit of certain category
+visitRouter.get('/timeLength/:timeLength', async (request, response) => {
+    const filteredVisits = await Visit.find({ timeLength: request.params.timeLength })
+    if (filteredVisits) {
+        response.json(filteredVisits)
+    } else {
+        response.json(404).end()
+    }
+})
+visitRouter.get('/category/:category', async (request, response) => {
+    const filteredVisits = await Visit.find({ category: request.params.category })
+    if (filteredVisits) {
+        response.json(filteredVisits)
+    } else {
+        response.json(404).end()
+    }
+})
+
+//PersonModel.find({ favouriteFoods: "sushi" }, ...); // favouriteFoods contains "sushi"
+
 // add entry
 visitRouter.post('/', async (request, response) => {
     // token verification

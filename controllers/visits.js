@@ -4,12 +4,9 @@ const jwt = require('jsonwebtoken')
 const Visit = require('../models/visit')
 
 // get all visit entries
-visitRouter.get('/',  (request, response) => {
-    //const visits = await Visit.find({})
-    //response.json(visits)
-    Visit.find({}).then(persons => {
-        response.json(persons)
-      })
+visitRouter.get('/', async (request, response) => {
+    const visits = await Visit.find({})
+    response.json(visits)
 })
 
 // view individual entry

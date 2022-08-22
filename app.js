@@ -3,7 +3,6 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 require('express-async-errors')
-require('dotenv').config()
 
 // internal imports
 const logger = require('./utils/logger')
@@ -14,8 +13,7 @@ const visitRouter = require('./controllers/visits')
 const visitUsersRouter = require('./controllers/visitUsers')
 const loginRouter = require('./controllers/login')
 
-//const url = config.MONGODB_URI
-const url = process.env.MONGODB_URI
+const url = config.MONGODB_URI
 
 logger.info('connecting to', url)
 

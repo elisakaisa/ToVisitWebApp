@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 require('express-async-errors')
+require('dotenv').config()
 
 // internal imports
 const logger = require('./utils/logger')

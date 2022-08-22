@@ -13,7 +13,8 @@ const visitRouter = require('./controllers/visits')
 const visitUsersRouter = require('./controllers/visitUsers')
 const loginRouter = require('./controllers/login')
 
-const url = config.MONGODB_URI
+//const url = config.MONGODB_URI
+const url = process.env.MONGODB_URI
 
 logger.info('connecting to', url)
 

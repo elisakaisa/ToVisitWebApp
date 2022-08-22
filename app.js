@@ -27,6 +27,7 @@ mongoose.connect(url)
 
 // Middleware
 app.use(cors())
+app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 

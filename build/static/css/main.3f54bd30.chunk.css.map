@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/app.css"],"names":[],"mappings":"AAAA,MACI,oBAAqB,CACrB,0BAA2B,CAC3B,gBAAiB,CACjB,gBACJ","file":"main.3f54bd30.chunk.css","sourcesContent":[".list {\n    list-style-type: disc;\n    list-style-position: inside;\n    text-indent: -1em;\n    padding-left: 3em;\n}"]}

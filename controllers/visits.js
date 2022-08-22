@@ -37,8 +37,6 @@ visitRouter.get('/category/:category', async (request, response) => {
     }
 })
 
-//PersonModel.find({ favouriteFoods: "sushi" }, ...); // favouriteFoods contains "sushi"
-
 // add entry
 visitRouter.post('/', async (request, response) => {
     // token verification
@@ -127,6 +125,12 @@ visitRouter.patch('/:id', async (request, response) => {
 
 // delete entry
 visitRouter.delete('/:id', async (request, response) => {
+    
+    // token verification
+    if (!request.decodedToken) {
+        return response.status(401).json({ error: 'token missing or invalid' })
+    }
+
     const visitToRemove = await Visit.findByIdAndRemove(request.params.id)
     if(!visitToRemove) {
         return response.status(404).json({error: "entry not found"})

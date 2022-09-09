@@ -17,13 +17,17 @@ const url = config.MONGODB_URI
 
 logger.info('connecting to', url)
 
-mongoose.connect(url)
-  .then(() => {
-    logger.info('connected to MongoDB')
-  })
-  .catch((error) => {
-    logger.info('error connecting to MongoDB:', error.message)
-  })
+require('dotenv').config()
+console.log((process.env.NODE_ENV !== 'test'))
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(url)
+    .then(() => {
+      logger.info('connected to MongoDB')
+    })
+    .catch((error) => {
+      logger.info('error connecting to MongoDB:', error.message)
+    })
+}
 
 // Middleware
 app.use(cors())

@@ -6,10 +6,10 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest --verbose --runInBand --forceExit",
     "build:ui": "rm -rf build && cd ../to_visit_frontend/ && npm run build && cp -r build ../to_visit",
     "deploy": "git push heroku main",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs --tail"
   },
   "author": "Elisa Perini",
@@ -26,10 +26,16 @@
   "devDependencies": {
     "eslint": "^8.20.0",
     "jest": "^28.1.3",
-    "nodemon": "^2.0.19"
+    "mongodb-memory-server": "^8.9.1",
+    "mongodb-memory-server-core": "^8.9.1",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
   },
   "engines": {
     "node": "v16.17.0",
     "npm": "8.12.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

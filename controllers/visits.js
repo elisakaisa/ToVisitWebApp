@@ -15,7 +15,9 @@ visitRouter.get('/:id', async (request, response) => {
     if (visit) {
         response.json(visit)
     } else {
-        response.json(404).end()
+        response.status(404).json({
+            error: 'wrong id'
+        })
     }
 })
 

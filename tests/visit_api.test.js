@@ -64,11 +64,21 @@ describe('Single MongoMemoryServer', () => {
     })
 
     test('individual visit can be fetched', async () => {
-      await api
+      const response = await api
           .get(`/api/visits/${id}`)
           .expect(200)
           .expect('Content-Type', /application\/json/)
-  })
+      const body = response.body
+      expect(body.what).toEqual(helper.initialVisits[1].what)
+    })
+
+    test('individual visit cannot be fetched with an invalid id', async () => {
+      const wrongId = "00aa000aaa000000a0000aaa"
+      await api
+          .get(`/api/visits/${wrongId}`)
+          .expect(404)
+          .expect('Content-Type', /application\/json/)
+    })
 
   })
 
@@ -115,17 +125,17 @@ describe('Single MongoMemoryServer', () => {
     })
   })
 
+  let idToModify = null;
 
   /*----------------------- POST -------------------*/
   describe('POST request', () => {
 
     test('post request without token', async () => {
       const visitsAtStart = await helper.visitsInDb()
-      const newVisit = helper.newVisit
 
       await api
         .post('/api/visits')
-        .send(newVisit)
+        .send(helper.newVisit)
         .expect(401)
         .expect('Content-Type', /application\/json/)
 
@@ -146,11 +156,125 @@ describe('Single MongoMemoryServer', () => {
         .expect('Content-Type', /application\/json/)
 
       const visitsAtEnd = await helper.visitsInDb()
+      idToModify = visitsAtEnd[visitsAtEnd.length -1].id
       expect(visitsAtEnd.length).toBe(visitsAtStart.length + 1)
+      expect(visitsAtEnd[visitsAtStart.length].done).toEqual(false)
+      expect(visitsAtEnd[visitsAtStart.length].actualPrice).toEqual(null)
     })
-
     
   })
 
+  /*----------------------- PATCH -------------------*/
+  describe('PATCH request', () => {
+
+    test('what cannot be modified without token', async () => {
+
+      await api
+        .patch(`/api/visits/${idToModify}`)
+        .send({what: "modified what"})
+        .expect(401)
+        .expect('Content-Type', /application\/json/) 
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd[visitsAtEnd.length - 1].what).toEqual("fake 3")
+      
+    })
+
+    test('what can be modified', async () => {
+
+      await api
+        .patch(`/api/visits/${idToModify}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({what: "modified what"})
+        .expect(201)
+        .expect('Content-Type', /application\/json/) 
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd[visitsAtEnd.length - 1].what).toEqual("modified what")
+    })
+
+    test('done can be modified', async () => {
+
+      const visitsAtStart = await helper.visitsInDb()
+      expect(visitsAtStart[visitsAtStart.length - 1].done).toEqual(false)
+
+      await api
+        .patch(`/api/visits/${idToModify}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({done: true})
+        .expect(201)
+        .expect('Content-Type', /application\/json/) 
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd[visitsAtEnd.length - 1].done).toEqual(true)
+    })
+    
+
+    test('actualPrice and totalWalkingDistance can be modified', async () => {
+
+      const visitsAtStart = await helper.visitsInDb()
+      expect(visitsAtStart[visitsAtStart.length - 1].actualPrice).toEqual(null)
+      expect(visitsAtStart[visitsAtStart.length - 1].totalWalkingDistance).toEqual(null)
+
+      await api
+        .patch(`/api/visits/${idToModify}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({actualPrice: 1, totalWalkingDistance: 2})
+        .expect(201)
+        .expect('Content-Type', /application\/json/) 
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd[visitsAtEnd.length - 1].actualPrice).toEqual(1)
+      expect(visitsAtEnd[visitsAtEnd.length - 1].totalWalkingDistance).toEqual(2)
+    })
+
+
+    test('actualPrice and totalWalkingDistance cannot be modified with invalid datatypes', async () => {
+
+      const visitsAtStart = await helper.visitsInDb()
+      expect(visitsAtStart[visitsAtStart.length - 1].actualPrice).toEqual(1)
+      expect(visitsAtStart[visitsAtStart.length - 1].totalWalkingDistance).toEqual(2)
+
+      await api
+        .patch(`/api/visits/${idToModify}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({actualPrice: "car", totalWalkingDistance: "seat"})
+        .expect(201)
+        .expect('Content-Type', /application\/json/) 
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd[visitsAtEnd.length - 1].actualPrice).toEqual(1)
+      expect(visitsAtEnd[visitsAtEnd.length - 1].totalWalkingDistance).toEqual(2)
+    })
+  })
+
+
+  /*----------------------- DELETE -------------------*/
+  describe('DELETE request', () => {
+    test('cannot be deleted without token', async () => {
+      const visitsAtStart = await helper.visitsInDb()
+
+      await api
+        .delete(`/api/visits/${idToModify}`)
+        .expect(401)
+        .expect('Content-Type', /application\/json/) 
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd.length).toBe(visitsAtStart.length)
+      
+    })
+    
+    test('can be deleted with token', async () => {
+      const visitsAtStart = await helper.visitsInDb()
+
+      await api
+        .delete(`/api/visits/${idToModify}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(204)
+
+      const visitsAtEnd = await helper.visitsInDb()
+      expect(visitsAtEnd.length).toBe(visitsAtStart.length - 1)    
+    })
+  })
   
 })

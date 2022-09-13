@@ -15,7 +15,7 @@ An android app, in Java, is also in the works [here](https://github.com/elisakai
 
 ## Installation
 
-Requirements: `node: v16.17.0`and `npm: 8.12.2` (might work with previous versions too, not tested)
+Requirements: `node: v16.17.0` and `npm: 8.12.2` (might work with previous versions too, not tested)
 
 To use in development mode (with nodemon):
 
@@ -100,8 +100,7 @@ Currently none known.
 
 Possible improvements:
 
-- add filtering / query parameters
-- add more GET endpoints
+- add filtering / query parameters (ie. with urlsearchparameters?)
 - improve tests
 
 ## Note about testing

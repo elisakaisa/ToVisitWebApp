@@ -17,7 +17,10 @@ const initialVisits = [
             "indoors": false},
         "priceCategory": "$$",
         "easeOfOrganization": "easy",
-        "notes": "yada yada yada"
+        "notes": "yada yada yada",
+        "done": false,
+        "totalWalkingDistance": null,
+        "actualPrice": null
     },
     {
         "what": "fake 2",
@@ -33,7 +36,10 @@ const initialVisits = [
             "indoors": true},
         "priceCategory": "$",
         "easeOfOrganization": "hard",
-        "notes": "yada yada yada"
+        "notes": "yada yada yada",
+        "done": true,
+        "totalWalkingDistance": 10,
+        "actualPrice": 100
     }
 ]
 
@@ -65,7 +71,6 @@ const initialUsers = [
 // helper function
 const visitsInDb = async () => {
     const visits = await Visit.find({})
-    console.log(visits)
     return visits.map(visit => visit.toJSON())
 }
   

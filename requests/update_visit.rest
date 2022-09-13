@@ -1,7 +1,0 @@
-PATCH http://localhost:3111/api/visits/62ffa743a0aa739832e5ce21
-Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsaXNhIiwiaWQiOiI2MmU2YTJiMjRkN2YzNjU3Nzg4MDhiNTYiLCJpYXQiOjE2NjA5MjM0OTl9.R555NH6kyWV0d4k3ldpPzMxujMBGMMGRgJmr10RYet4
-
-{
-    "done": false
-}

@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 require('express-async-errors')
+require('dotenv').config()
 
 // internal imports
 const logger = require('./utils/logger')
@@ -17,8 +18,7 @@ const url = config.MONGODB_URI
 
 logger.info('connecting to', url)
 
-require('dotenv').config()
-console.log((process.env.NODE_ENV !== 'test'))
+// only run in non testing mode
 if (process.env.NODE_ENV !== 'test') {
   mongoose.connect(url)
     .then(() => {

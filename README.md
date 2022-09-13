@@ -17,7 +17,7 @@ An android app, in Java, is also in the works [here](https://github.com/elisakai
 
 Requirements: `node: v16.17.0`and `npm: 8.12.2` (might work with previous versions too, not tested)
 
-To use in development mode:
+To use in development mode (with nodemon):
 
 ```bash
 git clone
@@ -46,7 +46,18 @@ SECRET = [any string]
 
 `POST [localhost address]/api/visits` adds a new visit
 
-`PATCH [localhost address]/api/visits/:id` replaces any fields of a visit with a given id, see `requests/update_visit.rest` for an example
+`PATCH [localhost address]/api/visits/:id` replaces any fields of a visit with a given id, for example:
+
+```bash
+PATCH http://localhost:3111/api/visits/:id
+Content-Type: application/json
+Authorization: bearer <token>
+
+{
+    "done": false
+    // add any other parameters to change, 1 or multiple can be changed at the same time
+}
+```
 
 `DELETE [localhost address]/api/visits/:id` deletes given visit
 
@@ -93,9 +104,14 @@ Possible improvements:
 - add more GET endpoints
 - improve tests
 
+## Note about testing
+
+Testing is done using MongoDb Memory Server, which creates a mockup of the real mongodb server and hold the data in the memory. This allows the user to test the code without changing the data stored on the actual mongoDb server.
+To run the tests `npm run test`.
+
 ## Authors
 
-Elisa Perini
+Elisa Perini: [github](https://github.com/elisakaisa) | [linkedIn](https://www.linkedin.com/in/elisa-perini-2759ba227/)
 
 ## Credits
 

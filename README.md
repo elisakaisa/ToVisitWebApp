@@ -7,7 +7,7 @@ This repository also includes the frontend build.
 
 The backend is a RestApi using node.js, the data is stored in MongoDB.
 
-Can be accessed online [here](https://pacific-spire-62523.herokuapp.com/).
+Can be accessed online (deployed with railway) [here](https://to-visit-webapp.up.railway.app/).
 
 Front-end part, in ReactJs, can be viewed [here](https://github.com/elisakaisa/ToVisitWebApp_clientSide).
 
